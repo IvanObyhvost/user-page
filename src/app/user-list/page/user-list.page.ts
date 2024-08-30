@@ -17,6 +17,7 @@ export class UserListPage {
 
   createUser() {
     this.showModal = true;
+    this.user = new User();
   }
 
   public onWillDismiss() {

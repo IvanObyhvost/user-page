@@ -1,24 +1,24 @@
 <table>
   <thead>
-    <tr class="BEM-row">
-      <th class="BEM-table-header">Username</th>
-      <th class="BEM-table-header">First name</th>
-      <th class="BEM-table-header">Last name</th>
-      <th class="BEM-table-header">Email</th>
-      <th class="BEM-table-header">Type</th>
+    <tr>
+      <th class="col-header col-username">Username</th>
+      <th class="col-header col-first-name">First name</th>
+      <th class="col-header col-last-name">Last name</th>
+      <th class="col-header col-email">Email</th>
+      <th class="col-header col-user-type">Type</th>
     </tr>
   </thead>
   <tbody>
     <tr
-      class="BEM-row"
-      *ngFor="let user of users$ | async"
+      class="row"
+      *ngFor="let user of users$ | async; trackBy: trackByFn"
       (click)="selectUser(user)"
     >
-      <td class="BEM-col BEM-col-username">{{ user.username }}</td>
-      <td class="BEM-col BEM-col-first-name">{{ user.firstName }}</td>
-      <td class="BEM-col BEM-col-last-name">{{ user.lastName }}</td>
-      <td class="BEM-col BEM-col-email">{{ user.email }}</td>
-      <td class="BEM-col BEM-col-user-type">{{ user.userType }}</td>
+      <td class="col-username">{{ user.username }}</td>
+      <td class="col-first-name text-capitalize">{{ user.firstName }}</td>
+      <td class="col-last-name text-capitalize">{{ user.lastName }}</td>
+      <td class="col-email">{{ user.email }}</td>
+      <td class="col-user-type text-capitalize">{{ user.userType }}</td>
     </tr>
   </tbody>
 </table>

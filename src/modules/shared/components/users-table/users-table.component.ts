@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, NgForOf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { User } from '@app/core/models';
 import { UsersService } from '@app/core/services';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-users-table',
@@ -16,18 +17,22 @@ import { UsersService } from '@app/core/services';
   styleUrls: ['./users-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [CommonModule],
+  imports: [NgForOf, AsyncPipe],
 })
 export class UsersTableComponent implements OnInit {
   @Output() selectedUser = new EventEmitter<User>();
   private usersService = inject(UsersService);
-  public users$ = this.usersService.users;
+  public users$: Observable<User[]> = this.usersService.users;
 
   ngOnInit() {
     this.usersService.getUsers().subscribe();
   }
 
-  selectUser(user: User) {
+  public selectUser(user: User) {
     this.selectedUser.emit(user);
+  }
+
+  public trackByFn(index: number, user: User) {
+    return user.uuid;
   }
 }

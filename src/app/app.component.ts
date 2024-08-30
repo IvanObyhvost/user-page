@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ToasterComponent } from '@app/shared/components/toaster/toaster.component';
+import { ToasterComponent } from '@app/shared/components';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +9,4 @@ import { ToasterComponent } from '@app/shared/components/toaster/toaster.compone
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
-  title = 'user-page';
-}
+export class AppComponent {}

@@ -1,9 +1,11 @@
-<div class="app-modal-wrapper">
-  <div class="app-modal-content">
-    <div class="app-modal-header">
-      <span *ngIf="isNewUser" class="title">Create new user</span>
-      <span *ngIf="!isNewUser" class="title">
-        {{ user?.firstName }} {{ user?.lastName }}
+<div class="modal-wrapper">
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="title">
+        <ng-container *ngIf="isNewUser">Create new user</ng-container>
+        <ng-container *ngIf="!isNewUser">
+          {{ user?.firstName }} {{ user?.lastName }}
+        </ng-container>
       </span>
       <button class="close-btn" (click)="closeModal()"></button>
     </div>
@@ -17,29 +19,25 @@
             name="username"
             formControlName="username"
             autocomplete="off"
+            spellcheck="false"
             [class.is-invalid]="
               (userForm.get('username')?.touched ||
                 userForm.get('username')?.dirty) &&
               userForm.get('username')?.invalid
             "
           />
-          <span
+          <div
             class="invalid-feedback"
-            *ngIf="
-              (userForm.get('username')?.touched ||
-                userForm.get('username')?.dirty) &&
-              userForm.get('username')?.invalid
-            "
+            *ngIf="userForm.get('username')?.hasError('required')"
           >
-            <ng-container
-              *ngIf="userForm.get('username')?.errors?.['required']"
-            >
-              Username must be required</ng-container
-            >
-            <ng-container *ngIf="userForm.get('username')?.errors?.['unique']">
-              Username must be unique
-            </ng-container>
-          </span>
+            This field is required
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="userForm.get('username')?.hasError('unique')"
+          >
+            Username must be unique
+          </div>
         </div>
         <div class="row-label-value">
           <label class="row-label">First name<span>*</span></label>
@@ -47,25 +45,20 @@
             class="row-value"
             type="text"
             formControlName="firstName"
+            autocomplete="off"
+            spellcheck="false"
             [class.is-invalid]="
               (userForm.get('firstName')?.touched ||
                 userForm.get('firstName')?.dirty) &&
               userForm.get('firstName')?.invalid
             "
           />
-          <span
+          <div
             class="invalid-feedback"
-            *ngIf="
-              (userForm.get('firstName')?.touched ||
-                userForm.get('firstName')?.dirty) &&
-              userForm.get('firstName')?.invalid
-            "
-            ><ng-container
-              *ngIf="userForm.get('firstName')?.errors?.['required']"
-            >
-              First name must be required
-            </ng-container>
-          </span>
+            *ngIf="userForm.get('firstName')?.hasError('required')"
+          >
+            This field is required
+          </div>
         </div>
         <div class="row-label-value">
           <label class="row-label">Last name<span>*</span></label>
@@ -73,29 +66,31 @@
             class="row-value"
             type="text"
             formControlName="lastName"
+            autocomplete="off"
+            spellcheck="false"
             [class.is-invalid]="
               (userForm.get('lastName')?.touched ||
                 userForm.get('lastName')?.dirty) &&
               userForm.get('lastName')?.invalid
             "
           />
-          <span
+          <div
             class="invalid-feedback"
-            *ngIf="
-              (userForm.get('lastName')?.touched ||
-                userForm.get('lastName')?.dirty) &&
-              userForm.get('lastName')?.invalid
-            "
-            ><ng-container
-              *ngIf="userForm.get('lastName')?.errors?.['required']"
-            >
-              Last name must be required
-            </ng-container>
-          </span>
+            *ngIf="userForm.get('lastName')?.hasError('required')"
+          >
+            This field is required
+          </div>
         </div>
         <div class="row-label-value">
           <label class="row-label">Email<span>*</span></label>
-          <div class="row-value-email">
+          <div
+            class="row-value-email"
+            [class.is-invalid]="
+              (userForm.get('email')?.touched ||
+                userForm.get('email')?.dirty) &&
+              userForm.get('email')?.invalid
+            "
+          >
             <svg
               class="email-icon"
               xmlns="http://www.w3.org/2000/svg"
@@ -121,27 +116,18 @@
             <input
               type="email"
               formControlName="email"
-              [class.is-invalid]="
-                (userForm.get('email')?.touched ||
-                  userForm.get('email')?.dirty) &&
-                userForm.get('email')?.invalid
-              "
+              autocomplete="off"
+              spellcheck="false"
             />
           </div>
-          <span
-            class="invalid-feedback"
-            *ngIf="
-              (userForm.get('email')?.touched ||
-                userForm.get('email')?.dirty) &&
-              userForm.get('email')?.invalid
-            "
-            ><ng-container *ngIf="userForm.get('email')?.errors?.['required']">
-              Email must be required
+          <div class="invalid-feedback">
+            <ng-container *ngIf="userForm.get('email')?.hasError('required')">
+              This field is required
             </ng-container>
-            <ng-container *ngIf="userForm.get('email')?.errors?.['email']">
-              Email must be email
+            <ng-container *ngIf="userForm.get('email')?.hasError('email')">
+              Email must be correct
             </ng-container>
-          </span>
+          </div>
         </div>
         <div class="row-label-value">
           <label class="row-label">Type<span>*</span></label>
@@ -149,6 +135,8 @@
             class="row-value"
             type="text"
             formControlName="userType"
+            autocomplete="off"
+            spellcheck="false"
             [class.is-invalid]="
               (userForm.get('userType')?.touched ||
                 userForm.get('userType')?.dirty) &&
@@ -159,55 +147,46 @@
               {{ value }}
             </option>
           </select>
-          <span
+          <div
             class="invalid-feedback"
-            *ngIf="
-              (userForm.get('userType')?.touched ||
-                userForm.get('userType')?.dirty) &&
-              userForm.get('userType')?.invalid
-            "
-            ><ng-container
-              *ngIf="userForm.get('userType')?.errors?.['required']"
-            >
-              Type must be required
-            </ng-container>
-          </span>
+            *ngIf="userForm.get('userType')?.hasError('required')"
+          >
+            This field is required
+          </div>
         </div>
-        <div class="row-label-value">
+        <div class="row-label-value row-password">
           <label class="row-label">Password<span>*</span></label>
           <input
             class="row-value"
             type="password"
             formControlName="password"
+            autocomplete="off"
+            spellcheck="false"
             [class.is-invalid]="
               (userForm.get('password')?.touched ||
                 userForm.get('password')?.dirty) &&
               userForm.get('password')?.invalid
             "
           />
-          <div
-            class="invalid-feedback"
-            *ngIf="
-              (userForm.get('password')?.touched ||
-                userForm.get('password')?.dirty) &&
-              userForm.get('password')?.invalid
-            "
-          >
+          <div class="invalid-feedback">
             <ng-container
-              *ngIf="userForm.get('password')?.errors?.['required']"
+              *ngIf="userForm.get('password')?.hasError('required')"
             >
-              Password must be required
+              This field is required
             </ng-container>
             <ng-container
-              *ngIf="userForm.get('password')?.errors?.['minlength']"
+              *ngIf="userForm.get('password')?.hasError('minlength')"
             >
               Password must be at least 8 characters long
             </ng-container>
-            <ng-container
-              *ngIf="userForm.get('password')?.errors?.['minOneNumber'] || userForm.get('password')?.errors?.['minOneLetter']"
+            <div
+              *ngIf="
+                userForm.get('password')?.hasError('minOneNumber') ||
+                userForm.get('password')?.hasError('minOneLetter')
+              "
             >
-              <div>Password must have at least one number and one letter</div>
-            </ng-container>
+              Password must have at least one number and one letter
+            </div>
           </div>
         </div>
         <div class="row-label-value">
@@ -216,46 +195,40 @@
             class="row-value"
             type="password"
             formControlName="confirmPassword"
+            autocomplete="off"
+            spellcheck="false"
             [class.is-invalid]="
               (userForm.get('confirmPassword')?.touched ||
                 userForm.get('confirmPassword')?.dirty) &&
               userForm.get('confirmPassword')?.invalid
             "
           />
-          <span
+          <div
+            class="invalid-feedback"
+            *ngIf="userForm.get('confirmPassword')?.hasError('required')"
+          >
+            This field is required
+          </div>
+          <div
             class="invalid-feedback"
             *ngIf="
-              (userForm.get('confirmPassword')?.touched ||
-                userForm.get('confirmPassword')?.dirty) &&
-              userForm.get('confirmPassword')?.invalid
+              userForm.get('confirmPassword')?.hasError('passwordMismatch')
             "
-            ><ng-container
-              *ngIf="userForm.get('confirmPassword')?.errors?.['required']"
-            >
-              Repeat password must be required
-            </ng-container>
-            <ng-container
-              *ngIf="userForm.get('confirmPassword')?.errors?.['passwordMismatch']"
-            >
-              Passwords must match
-            </ng-container>
-          </span>
+          >
+            Passwords must match
+          </div>
         </div>
       </form>
     </div>
-    <div class="modal-footer flex items-center justify-end gap-x-6">
-      <button
-        *ngIf="isNewUser"
-        class="BEM-button bg-blue"
-        (click)="createUser()"
-      >
+    <div class="modal-footer">
+      <button *ngIf="isNewUser" class="button bg-blue" (click)="createUser()">
         Create
       </button>
       <ng-container *ngIf="!isNewUser">
-        <button class="BEM-button bg-red button-delete" (click)="deleteUser()">
+        <button class="button bg-red button-delete" (click)="deleteUser()">
           Delete
         </button>
-        <button class="BEM-button bg-blue" (click)="saveChanges()">Save</button>
+        <button class="button bg-blue" (click)="saveChanges()">Save</button>
       </ng-container>
     </div>
   </div>

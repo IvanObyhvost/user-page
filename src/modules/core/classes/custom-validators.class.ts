@@ -9,11 +9,13 @@ export class CustomValidators {
     }
     return null;
   }
+
   static minOneNumber(control: AbstractControl): ValidationErrors | null {
     if (!control.value) return null;
     const regex = /\d{1}/;
     return regex.test(control.value) ? null : { minOneNumber: true };
   }
+
   static minOneLetter(control: AbstractControl): ValidationErrors | null {
     if (!control.value) return null;
     const regex = /[A-Za-z]{1}/;

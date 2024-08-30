@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { LocalstorageService } from '../localstorage/localstorage.service';
-import { EMPTY, Observable, of, throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { STORAGE_KEYS } from '@app/shared/constants';
 import { User } from '@app/core/models';
 
@@ -59,7 +59,6 @@ export class UsersApiService {
   }
 
   private hasDuplicate(user: User): boolean {
-    //bug
     return this.users
       .filter((item) => item.uuid !== user.uuid)
       .some((item) => item.username === user.username);

@@ -32,10 +32,25 @@ body {
   --color-blue: #2e8ff0;
   --color-red: #f44682;
   --color-green: #66bb6a;
+  --color-white: #ffffff;
+  --color-gray: #3f4254;
+  --color-light-gray: #f3f6f9;
 }
 .bg-blue {
   background-color: var(--color-blue);
 }
 .bg-red {
   background-color: var(--color-red);
+}
+.button {
+  border-radius: 6px;
+  padding: 16px 20px;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  text-transform: capitalize;
+  min-width: 120px;
+  &:hover {
+    opacity: 0.8;
+  }
 }

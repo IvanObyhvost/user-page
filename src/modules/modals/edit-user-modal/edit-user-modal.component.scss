@@ -1,10 +1,4 @@
 :host {
-  // display: block;
-  // position: absolute;
-  // left: 0;
-  // top: 0;
-  // width: 100%;
-  // height: 100%;
   left: 0;
   right: 0;
   top: 0;
@@ -17,7 +11,7 @@
   z-index: 0;
 }
 
-.app-modal-wrapper {
+.modal-wrapper {
   animation-duration: 0.3s;
   animation-fill-mode: forwards;
   animation-name: showModal;
@@ -29,7 +23,6 @@
   height: 100%;
   max-height: 100%;
   max-width: 100%;
-  // padding: 25px;
   position: absolute;
   top: 0;
   right: 0;
@@ -38,7 +31,7 @@
   width: 500px;
   z-index: 1;
   overflow: hidden;
-  .app-modal-content {
+  .modal-content {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -46,7 +39,7 @@
     width: 100%;
     padding: 25px;
   }
-  .app-modal-header {
+  .modal-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -73,12 +66,12 @@
     overflow-y: auto;
     margin: 10px 0;
     .row-label-value {
-      padding: 10px 0;
-      height: 100px;
+      padding: 5px 0;
+      height: 90px;
       .row-label {
         display: block;
         font-size: 14px;
-        color: #3f4254;
+        color: var(--color-gray);
         padding-bottom: 4px;
       }
       .row-value {
@@ -86,9 +79,9 @@
         padding: 0 16px;
         border-radius: 6px;
         height: 46px;
-        background-color: #f3f6f9;
-        color: #3f4254;
-        border: 1px solid #f3f6f9;
+        background-color: var(--color-light-gray);
+        color: var(--color-gray);
+        border: 1px solid var(--color-light-gray);
         position: relative;
         outline: none;
         &:focus {
@@ -96,6 +89,9 @@
         }
         &.is-invalid {
           border-color: var(--color-red);
+          & + .invalid-feedback {
+            display: block;
+          }
         }
       }
       select {
@@ -108,15 +104,20 @@
           padding: 0 16px 0 32px;
           border-radius: 6px;
           height: 46px;
-          background-color: #f3f6f9;
-          color: #3f4254;
-          border: 1px solid #f3f6f9;
+          background-color: var(--color-light-gray);
+          color: var(--color-gray);
+          border: 1px solid var(--color-light-gray);
           position: relative;
           &:focus {
             outline-color: var(--color-blue);
           }
-          &.is-invalid {
+        }
+        &.is-invalid {
+          input {
             border-color: var(--color-red);
+          }
+          & + .invalid-feedback {
+            display: block;
           }
         }
         .email-icon {
@@ -127,12 +128,16 @@
           height: 24px;
           z-index: 1;
           transform: translateY(-50%);
-          color: #3f4254;
+          color: var(--color-gray);
           opacity: 0.7;
         }
       }
     }
+    .row-password {
+      height: 108px;
+    }
     .invalid-feedback {
+      display: none;
       margin-top: 2px;
       font-size: 14px;
       color: var(--color-red);

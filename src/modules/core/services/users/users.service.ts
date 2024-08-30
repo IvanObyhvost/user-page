@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { User } from '@app/core/models';
-import { BehaviorSubject, catchError, of, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, tap, throwError } from 'rxjs';
 import { UsersApiService } from '../api/users-api.service';
 import { ToasterService } from '../toaster/toaster.service';
 import { TOASTER_TYPES } from '@app/shared/constants';

@@ -5,31 +5,37 @@ table {
   width: 100%;
   padding: 0 30px;
 }
-.BEM- {
-  &row {
-    height: 65px;
-  }
-  &table-header {
-    text-transform: uppercase;
-    color: #9d9dae;
-    cursor: default;
-    text-align: start;
-  }
-  &col {
-    height: 70px;
+.row {
+  background-color: #f4f5f8;
+  cursor: pointer;
+  color: #2c3044;
+  border-top: 2px solid var(--color-white);
+  height: 70px;
+  &:hover {
+    background-color: #eff0f4;
   }
 }
-tbody {
-  .BEM-row {
-    background-color: #f4f5f8;
-    cursor: pointer;
-    color: #2c3044;
-    border-top: 2px solid #ffffff;
-    &:hover {
-      background-color: #eff0f4;
-    }
-  }
+.col-header {
+  height: 65px;
+  text-transform: uppercase;
+  color: #9d9dae;
+  cursor: default;
+  text-align: start;
 }
-//text row #2C3044
-// bg row F4F5F8
-// hover row EFF0F4
+.col-username {
+  padding-left: 16px;
+  width: 25%;
+}
+.col-first-name {
+  width: 20%;
+}
+.col-last-name {
+  width: 20%;
+}
+.col-email {
+  width: 25%;
+}
+.col-user-type {
+  width: 10%;
+  padding-right: 16px;
+}

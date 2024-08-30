@@ -18,7 +18,6 @@ import { CustomValidators } from '@app/core/classes';
 import { User } from '@app/core/models';
 import { ToasterService, UsersService } from '@app/core/services';
 import { TOASTER_TYPES, USER_TYPE } from '@app/shared/constants';
-import { FormInvalidClassDirective } from '@app/shared/directives';
 
 @Component({
   selector: 'app-edit-user-modal',
@@ -26,7 +25,7 @@ import { FormInvalidClassDirective } from '@app/shared/directives';
   styleUrls: ['./edit-user-modal.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormInvalidClassDirective],
+  imports: [CommonModule, ReactiveFormsModule],
 })
 export class EditUserModalComponent implements OnInit {
   @Input() user: User | undefined;
@@ -65,28 +64,8 @@ export class EditUserModalComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (!this.user) {
-      this.isNewUser = true;
-      this.user = new User({
-        lastName: 'sdf',
-        firstName: 'asdf',
-        email: 'af@afd.adf',
-        password: '1111111q',
-        userType: 'admin',
-      });
-    }
+    this.isNewUser = !this.user?.username;
     this.initForm();
-    // for (let index = 1; index < 30; index++) {
-    //   const user = new User({
-    //     username: index.toString(),
-    //     lastName: 'sdf',
-    //     firstName: 'asdf',
-    //     email: 'af@afd.adf',
-    //     password: '1111111q',
-    //     userType: 'admin',
-    //   });
-    //   this.usersService.add(user).subscribe();
-    // }
   }
 
   private initForm() {
@@ -151,7 +130,7 @@ export class EditUserModalComponent implements OnInit {
     this.usersService.delete(this.user?.uuid as string).subscribe(() => {
       this.toasterService.showToaster(
         TOASTER_TYPES.Success,
-        'User was successfully added'
+        'User was successfully deleted'
       );
       this.closeModal();
     });
