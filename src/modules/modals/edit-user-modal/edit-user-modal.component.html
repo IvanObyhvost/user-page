@@ -1,0 +1,263 @@
+<div class="app-modal-wrapper">
+  <div class="app-modal-content">
+    <div class="app-modal-header">
+      <span *ngIf="isNewUser" class="title">Create new user</span>
+      <span *ngIf="!isNewUser" class="title">
+        {{ user?.firstName }} {{ user?.lastName }}
+      </span>
+      <button class="close-btn" (click)="closeModal()"></button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="userForm">
+        <div class="row-label-value">
+          <label class="row-label">Username<span>*</span></label>
+          <input
+            class="row-value"
+            type="text"
+            name="username"
+            formControlName="username"
+            autocomplete="off"
+            [class.is-invalid]="
+              (userForm.get('username')?.touched ||
+                userForm.get('username')?.dirty) &&
+              userForm.get('username')?.invalid
+            "
+          />
+          <span
+            class="invalid-feedback"
+            *ngIf="
+              (userForm.get('username')?.touched ||
+                userForm.get('username')?.dirty) &&
+              userForm.get('username')?.invalid
+            "
+          >
+            <ng-container
+              *ngIf="userForm.get('username')?.errors?.['required']"
+            >
+              Username must be required</ng-container
+            >
+            <ng-container *ngIf="userForm.get('username')?.errors?.['unique']">
+              Username must be unique
+            </ng-container>
+          </span>
+        </div>
+        <div class="row-label-value">
+          <label class="row-label">First name<span>*</span></label>
+          <input
+            class="row-value"
+            type="text"
+            formControlName="firstName"
+            [class.is-invalid]="
+              (userForm.get('firstName')?.touched ||
+                userForm.get('firstName')?.dirty) &&
+              userForm.get('firstName')?.invalid
+            "
+          />
+          <span
+            class="invalid-feedback"
+            *ngIf="
+              (userForm.get('firstName')?.touched ||
+                userForm.get('firstName')?.dirty) &&
+              userForm.get('firstName')?.invalid
+            "
+            ><ng-container
+              *ngIf="userForm.get('firstName')?.errors?.['required']"
+            >
+              First name must be required
+            </ng-container>
+          </span>
+        </div>
+        <div class="row-label-value">
+          <label class="row-label">Last name<span>*</span></label>
+          <input
+            class="row-value"
+            type="text"
+            formControlName="lastName"
+            [class.is-invalid]="
+              (userForm.get('lastName')?.touched ||
+                userForm.get('lastName')?.dirty) &&
+              userForm.get('lastName')?.invalid
+            "
+          />
+          <span
+            class="invalid-feedback"
+            *ngIf="
+              (userForm.get('lastName')?.touched ||
+                userForm.get('lastName')?.dirty) &&
+              userForm.get('lastName')?.invalid
+            "
+            ><ng-container
+              *ngIf="userForm.get('lastName')?.errors?.['required']"
+            >
+              Last name must be required
+            </ng-container>
+          </span>
+        </div>
+        <div class="row-label-value">
+          <label class="row-label">Email<span>*</span></label>
+          <div class="row-value-email">
+            <svg
+              class="email-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
+            >
+              <path
+                d="M320 254.27c-4.5 51-40.12 80-80.55 80s-67.34-35.82-63.45-80 37.12-80 77.55-80 70.33 36 66.45 80z"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="32"
+              />
+              <path
+                d="M319.77 415.77c-28.56 12-47.28 14.5-79.28 14.5-97.2 0-169-78.8-160.49-176s94.31-176 191.51-176C381 78.27 441.19 150 432.73 246c-6.31 71.67-52.11 92.32-76.09 88.07-22.56-4-41.18-24.42-37.74-63.5l8.48-96.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="32"
+              />
+            </svg>
+            <input
+              type="email"
+              formControlName="email"
+              [class.is-invalid]="
+                (userForm.get('email')?.touched ||
+                  userForm.get('email')?.dirty) &&
+                userForm.get('email')?.invalid
+              "
+            />
+          </div>
+          <span
+            class="invalid-feedback"
+            *ngIf="
+              (userForm.get('email')?.touched ||
+                userForm.get('email')?.dirty) &&
+              userForm.get('email')?.invalid
+            "
+            ><ng-container *ngIf="userForm.get('email')?.errors?.['required']">
+              Email must be required
+            </ng-container>
+            <ng-container *ngIf="userForm.get('email')?.errors?.['email']">
+              Email must be email
+            </ng-container>
+          </span>
+        </div>
+        <div class="row-label-value">
+          <label class="row-label">Type<span>*</span></label>
+          <select
+            class="row-value"
+            type="text"
+            formControlName="userType"
+            [class.is-invalid]="
+              (userForm.get('userType')?.touched ||
+                userForm.get('userType')?.dirty) &&
+              userForm.get('userType')?.invalid
+            "
+          >
+            <option *ngFor="let value of userTypeList" [value]="value">
+              {{ value }}
+            </option>
+          </select>
+          <span
+            class="invalid-feedback"
+            *ngIf="
+              (userForm.get('userType')?.touched ||
+                userForm.get('userType')?.dirty) &&
+              userForm.get('userType')?.invalid
+            "
+            ><ng-container
+              *ngIf="userForm.get('userType')?.errors?.['required']"
+            >
+              Type must be required
+            </ng-container>
+          </span>
+        </div>
+        <div class="row-label-value">
+          <label class="row-label">Password<span>*</span></label>
+          <input
+            class="row-value"
+            type="password"
+            formControlName="password"
+            [class.is-invalid]="
+              (userForm.get('password')?.touched ||
+                userForm.get('password')?.dirty) &&
+              userForm.get('password')?.invalid
+            "
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="
+              (userForm.get('password')?.touched ||
+                userForm.get('password')?.dirty) &&
+              userForm.get('password')?.invalid
+            "
+          >
+            <ng-container
+              *ngIf="userForm.get('password')?.errors?.['required']"
+            >
+              Password must be required
+            </ng-container>
+            <ng-container
+              *ngIf="userForm.get('password')?.errors?.['minlength']"
+            >
+              Password must be at least 8 characters long
+            </ng-container>
+            <ng-container
+              *ngIf="userForm.get('password')?.errors?.['minOneNumber'] || userForm.get('password')?.errors?.['minOneLetter']"
+            >
+              <div>Password must have at least one number and one letter</div>
+            </ng-container>
+          </div>
+        </div>
+        <div class="row-label-value">
+          <label class="row-label">Repeat password<span>*</span></label>
+          <input
+            class="row-value"
+            type="password"
+            formControlName="confirmPassword"
+            [class.is-invalid]="
+              (userForm.get('confirmPassword')?.touched ||
+                userForm.get('confirmPassword')?.dirty) &&
+              userForm.get('confirmPassword')?.invalid
+            "
+          />
+          <span
+            class="invalid-feedback"
+            *ngIf="
+              (userForm.get('confirmPassword')?.touched ||
+                userForm.get('confirmPassword')?.dirty) &&
+              userForm.get('confirmPassword')?.invalid
+            "
+            ><ng-container
+              *ngIf="userForm.get('confirmPassword')?.errors?.['required']"
+            >
+              Repeat password must be required
+            </ng-container>
+            <ng-container
+              *ngIf="userForm.get('confirmPassword')?.errors?.['passwordMismatch']"
+            >
+              Passwords must match
+            </ng-container>
+          </span>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer flex items-center justify-end gap-x-6">
+      <button
+        *ngIf="isNewUser"
+        class="BEM-button bg-blue"
+        (click)="createUser()"
+      >
+        Create
+      </button>
+      <ng-container *ngIf="!isNewUser">
+        <button class="BEM-button bg-red button-delete" (click)="deleteUser()">
+          Delete
+        </button>
+        <button class="BEM-button bg-blue" (click)="saveChanges()">Save</button>
+      </ng-container>
+    </div>
+  </div>
+</div>
+<div class="fade-background" (click)="closeModal()"></div>

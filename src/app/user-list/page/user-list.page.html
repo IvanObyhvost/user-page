@@ -1,0 +1,10 @@
+<div class="header-container">
+  <button class="BEM-button bg-blue" (click)="createUser()">Create user</button>
+</div>
+<app-users-table (selectedUser)="selectUser($event)"></app-users-table>
+<app-edit-user-modal
+  *ngIf="showModal"
+  [(showModal)]="showModal"
+  [user]="user"
+  (willDismiss)="onWillDismiss()"
+></app-edit-user-modal>

@@ -1,0 +1,9 @@
+<div
+  *ngIf="payload"
+  @showToaster
+  class="toaster-container"
+  [class.success]="payload.type === TOASTER_TYPES.Success"
+  [class.error]="payload.type === TOASTER_TYPES.Error"
+>
+  {{ payload.message }}
+</div>

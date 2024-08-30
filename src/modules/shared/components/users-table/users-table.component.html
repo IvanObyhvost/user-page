@@ -1,0 +1,24 @@
+<table>
+  <thead>
+    <tr class="BEM-row">
+      <th class="BEM-table-header">Username</th>
+      <th class="BEM-table-header">First name</th>
+      <th class="BEM-table-header">Last name</th>
+      <th class="BEM-table-header">Email</th>
+      <th class="BEM-table-header">Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      class="BEM-row"
+      *ngFor="let user of users$ | async"
+      (click)="selectUser(user)"
+    >
+      <td class="BEM-col BEM-col-username">{{ user.username }}</td>
+      <td class="BEM-col BEM-col-first-name">{{ user.firstName }}</td>
+      <td class="BEM-col BEM-col-last-name">{{ user.lastName }}</td>
+      <td class="BEM-col BEM-col-email">{{ user.email }}</td>
+      <td class="BEM-col BEM-col-user-type">{{ user.userType }}</td>
+    </tr>
+  </tbody>
+</table>

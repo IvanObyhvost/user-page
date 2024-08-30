@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+@import url("./global.scss");
+@import url("./utils.scss");
+
+.BEM-button {
+  border-radius: 6px;
+  padding: 16px 20px;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  text-transform: capitalize;
+  min-width: 120px;
+  &:hover {
+    opacity: 0.8;
+  }
+}

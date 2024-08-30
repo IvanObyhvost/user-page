@@ -1,0 +1,35 @@
+table {
+  border-collapse: collapse;
+  border-color: inherit;
+  text-indent: 0;
+  width: 100%;
+  padding: 0 30px;
+}
+.BEM- {
+  &row {
+    height: 65px;
+  }
+  &table-header {
+    text-transform: uppercase;
+    color: #9d9dae;
+    cursor: default;
+    text-align: start;
+  }
+  &col {
+    height: 70px;
+  }
+}
+tbody {
+  .BEM-row {
+    background-color: #f4f5f8;
+    cursor: pointer;
+    color: #2c3044;
+    border-top: 2px solid #ffffff;
+    &:hover {
+      background-color: #eff0f4;
+    }
+  }
+}
+//text row #2C3044
+// bg row F4F5F8
+// hover row EFF0F4
