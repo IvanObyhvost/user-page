@@ -3,7 +3,7 @@ import { User } from '@app/core/models';
 import { BehaviorSubject, catchError, tap, throwError } from 'rxjs';
 import { UsersApiService } from '../api/users-api.service';
 import { ToasterService } from '../toaster/toaster.service';
-import { TOASTER_TYPES } from '@app/shared/constants';
+import { TOASTER_TYPE } from '@app/shared/constants';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +21,7 @@ export class UsersService {
     return this.usersApiService.getUsers().pipe(
       tap((users) => {
         this.users$.next(users);
-      })
+      }),
     );
   }
 
@@ -36,12 +36,12 @@ export class UsersService {
       catchError((error) => {
         if (error?.error === 'unique') {
           this.toasterService.showToaster(
-            TOASTER_TYPES.Error,
-            'Username must be unique'
+            TOASTER_TYPE.Error,
+            'Username must be unique',
           );
         }
         return throwError(() => error);
-      })
+      }),
     );
   }
 
@@ -56,12 +56,12 @@ export class UsersService {
       catchError((error) => {
         if (error?.error === 'unique') {
           this.toasterService.showToaster(
-            TOASTER_TYPES.Error,
-            'Username must be unique'
+            TOASTER_TYPE.Error,
+            'Username must be unique',
           );
         }
         return throwError(() => error);
-      })
+      }),
     );
   }
 
@@ -72,7 +72,7 @@ export class UsersService {
           .getValue()
           .filter((user) => user.uuid !== uuid);
         this.users$.next(users);
-      })
+      }),
     );
   }
 }

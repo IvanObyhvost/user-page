@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ToasterPayload } from '@app/core/interfaces';
-import { TOASTER_TYPES } from '@app/shared/constants';
+import { TOASTER_TYPE } from '@app/shared/constants';
 import { Subject } from 'rxjs';
 
 @Injectable({
@@ -11,7 +11,7 @@ export class ToasterService {
   public get payload() {
     return this.payload$.asObservable();
   }
-  public showToaster(type: TOASTER_TYPES, message: string) {
+  public showToaster(type: TOASTER_TYPE, message: string) {
     this.payload$.next({ type, message });
   }
 }

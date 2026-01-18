@@ -17,7 +17,7 @@ import {
 import { CustomValidators } from '@app/core/classes';
 import { User } from '@app/core/models';
 import { ToasterService, UsersService } from '@app/core/services';
-import { TOASTER_TYPES, USER_TYPE } from '@app/shared/constants';
+import { TOASTER_TYPE, USER_TYPE } from '@app/shared/constants';
 
 @Component({
   selector: 'app-edit-user-modal',
@@ -59,7 +59,7 @@ export class EditUserModalComponent implements OnInit {
       },
       {
         validators: CustomValidators.confirmPassword,
-      }
+      },
     );
   }
 
@@ -89,8 +89,8 @@ export class EditUserModalComponent implements OnInit {
     this.usersService.add(newUser).subscribe(
       () => {
         this.toasterService.showToaster(
-          TOASTER_TYPES.Success,
-          'User was successfully added'
+          TOASTER_TYPE.Success,
+          'User was successfully added',
         );
         this.closeModal();
       },
@@ -99,7 +99,7 @@ export class EditUserModalComponent implements OnInit {
           this.userForm.get('username')?.setErrors({ unique: true });
           this.userForm.get('username')?.markAsTouched();
         }
-      }
+      },
     );
   }
 
@@ -112,8 +112,8 @@ export class EditUserModalComponent implements OnInit {
     this.usersService.update(newUser).subscribe(
       () => {
         this.toasterService.showToaster(
-          TOASTER_TYPES.Success,
-          'User was successfully updated'
+          TOASTER_TYPE.Success,
+          'User was successfully updated',
         );
         this.closeModal();
       },
@@ -122,15 +122,15 @@ export class EditUserModalComponent implements OnInit {
           this.userForm.get('username')?.setErrors({ unique: true });
           this.userForm.get('username')?.markAsTouched();
         }
-      }
+      },
     );
   }
 
   public deleteUser() {
     this.usersService.delete(this.user?.uuid as string).subscribe(() => {
       this.toasterService.showToaster(
-        TOASTER_TYPES.Success,
-        'User was successfully deleted'
+        TOASTER_TYPE.Success,
+        'User was successfully deleted',
       );
       this.closeModal();
     });

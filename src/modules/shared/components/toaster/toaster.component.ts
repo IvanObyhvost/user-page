@@ -12,7 +12,7 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ToasterPayload } from '@app/core/interfaces';
 import { ToasterService } from '@app/core/services';
-import { TOASTER_TYPES } from '@app/shared/constants';
+import { TOASTER_TYPE } from '@app/shared/constants';
 import { showToaster } from 'src/app/app.animations';
 
 @Component({
@@ -29,7 +29,7 @@ export class ToasterComponent implements OnInit {
   private destroyRef = inject(DestroyRef);
   private cdr = inject(ChangeDetectorRef);
   public payload!: ToasterPayload | undefined;
-  public TOASTER_TYPES = TOASTER_TYPES;
+  public TOASTER_TYPES = TOASTER_TYPE;
 
   ngOnInit() {
     this.toasterService.payload

@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { LocalstorageService } from '../localstorage/localstorage.service';
 import { Observable, of, throwError } from 'rxjs';
-import { STORAGE_KEYS } from '@app/shared/constants';
+import { STORAGE_KEY } from '@app/shared/constants';
 import { User } from '@app/core/models';
 
 @Injectable({
@@ -15,7 +15,7 @@ export class UsersApiService {
   }
 
   private init() {
-    const data = this.localSorageService.getObject(STORAGE_KEYS.Users);
+    const data = this.localSorageService.getObject(STORAGE_KEY.Users);
     if (Array.isArray(data)) {
       this.users = data;
     }
@@ -34,7 +34,7 @@ export class UsersApiService {
     }
     const newUser = new User(user);
     this.users.push(newUser);
-    this.localSorageService.setObject(STORAGE_KEYS.Users, this.users);
+    this.localSorageService.setObject(STORAGE_KEY.Users, this.users);
     return of(newUser);
   }
 
@@ -48,13 +48,13 @@ export class UsersApiService {
     const newUser = new User(user);
     const index = this.users.findIndex((item) => item.uuid === user.uuid);
     this.users[index] = newUser;
-    this.localSorageService.setObject(STORAGE_KEYS.Users, this.users);
+    this.localSorageService.setObject(STORAGE_KEY.Users, this.users);
     return of(newUser);
   }
 
   deleteUser(uuid: string): Observable<void> {
     this.users = this.users.filter((item) => item.uuid !== uuid);
-    this.localSorageService.setObject(STORAGE_KEYS.Users, this.users);
+    this.localSorageService.setObject(STORAGE_KEY.Users, this.users);
     return of(undefined);
   }
 

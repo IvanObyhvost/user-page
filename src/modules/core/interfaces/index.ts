@@ -1,1 +1,1 @@
-export * from './toaster-payload.interface';
+export * from './toaster-api.interface';
